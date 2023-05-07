@@ -10,10 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,20 +38,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
-
-    File prjDir = this.getFilesDir();
-    File helloText = new File(prjDir, "hello.txt");
-
-    try {
-      FileOutputStream out = new FileOutputStream(helloText);
-      String hello = "Hello World!\nHello FCU!";
-      byte[] helloBytes = hello.getBytes();
-      out.write(helloBytes);
-      out.close();
-    } catch (FileNotFoundException e){
-      throw new RuntimeException(e);
-    } catch (IOException e){
-      throw new RuntimeException(e);
-    }
   }
 }
