@@ -53,7 +53,9 @@ public class Product extends AppCompatActivity {
 
     tvmeal_name.setText(maelName);
     tvmeal_discrip.setText(mealdiscrip);
-    String option1, option2, option3;
+    String option1 = "";
+    String option2 = "";
+    String option3 = "";
     if(classification.equals("burger")){  //可以自由新增
       option1 = "more sauce";
       option2 = "more veg";
@@ -62,7 +64,5 @@ public class Product extends AppCompatActivity {
     ckboption1.setText(option1);
     ckboption2.setText(option2);
     ckboption3.setText(option3);
-
-
   }
 }
