@@ -66,5 +66,16 @@ public class CartDatabase {
     public void setGetMealTime(String getMealTime) {
         this.getMealTime = getMealTime;
     }
+
+    public int getAllprice(){
+        int allPrice = 0;
+        Cursor cursor = db.rawQuery("SELECT * FROM Shopping", null);
+        while (cursor.moveToNext()){
+            int price = cursor.getInt(2);
+            int num = cursor.getInt(3);
+            allPrice = allPrice + (price*num);
+        }
+        return allPrice;
+    }
 }
 
