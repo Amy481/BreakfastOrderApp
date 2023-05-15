@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MenuDatabase {
+public class MenuDatabase { // 菜單資料庫
     private AppCompatActivity activity;
 
     private static final String DATABASE_NAME = "menu.db";

@@ -14,8 +14,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Cart extends AppCompatActivity {
+public class Cart extends AppCompatActivity { // 購物車界面
 
   private EditText ctRemark;
   private Button backToMenu;
@@ -32,6 +33,7 @@ public class Cart extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cart);
 
+    // 開啟購物車資料庫
     cartdata = new CartDatabase(this);
     cartdata.open();
 
@@ -51,6 +53,7 @@ public class Cart extends AppCompatActivity {
 
     cartlist.setAdapter(adaptor);
 
+    // 訂單金額投放
     int price_of_all = cartdata.getAllprice();
     allprice.setText("total: " + Integer.toString(price_of_all));
 
@@ -90,10 +93,14 @@ public class Cart extends AppCompatActivity {
       @Override
       public void onClick(View view) {
 
-        // 加一個防呆: 時間
+        // 加一個防呆: 要有選擇時間
+        if(cartdata.getGetMealTime() == null){
+          Toast.makeText(Cart.this,"please choose the time", Toast.LENGTH_SHORT).show();
+        } else {
+          Intent intent = new Intent(Cart.this, ConfirmOrder.class);
+          startActivity(intent);
+        }
 
-        Intent intent = new Intent(Cart.this, ConfirmOrder.class);
-        startActivity(intent);
       }
     };
 

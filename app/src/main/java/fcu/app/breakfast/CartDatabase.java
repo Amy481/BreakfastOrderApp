@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CartDatabase {
+public class CartDatabase { // 購物車資料庫
     private AppCompatActivity activity;
     private String storeName;
     private String getMealTime;

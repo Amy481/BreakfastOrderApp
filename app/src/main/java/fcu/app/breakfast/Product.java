@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Product extends AppCompatActivity {
+public class Product extends AppCompatActivity { // 商品介面
 
   private int id; // 假設從菜單那裡得到的id
   private MenuDatabase menudata; // 菜單資料庫
