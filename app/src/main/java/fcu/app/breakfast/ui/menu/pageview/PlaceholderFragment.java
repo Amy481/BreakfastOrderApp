@@ -51,6 +51,7 @@ public class PlaceholderFragment extends Fragment {
 
     binding = FragmentMenuBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
+
     //View root = inflater.inflate(R.layout.food_item_layout, container, false);
     final TextView textView = binding.sectionLabel;
     pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
