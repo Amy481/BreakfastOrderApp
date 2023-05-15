@@ -1,8 +1,7 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import fcu.app.breakfast.ui.menu.Menu;
+import fcu.app.breakfast.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.home;
 
 public class StoresItem {
     private int imageId;

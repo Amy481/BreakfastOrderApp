@@ -13,21 +13,21 @@
         android:theme="@style/Theme.Breakfast"
         tools:targetApi="31" >
         <activity
-            android:name=".ConfirmOrder"
+            android:name=".ui.cart.ConfirmOrder"
             android:exported="false" />
         <activity
-            android:name=".Cart"
+            android:name=".ui.cart.Cart"
             android:exported="false" />
         <activity
-            android:name=".Product"
+            android:name=".ui.cart.Product"
             android:exported="false" />
         <activity
-            android:name=".Menu"
+            android:name=".ui.menu.Menu"
             android:exported="false"
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.Breakfast.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

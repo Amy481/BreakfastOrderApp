@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.menu;
 
 public class FoodItem {
     private int imageId;

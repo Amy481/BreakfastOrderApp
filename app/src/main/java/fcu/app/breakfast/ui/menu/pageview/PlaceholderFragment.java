@@ -1,4 +1,4 @@
-package fcu.app.breakfast.ui.main;
+package fcu.app.breakfast.ui.menu.pageview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,8 +50,8 @@ public class PlaceholderFragment extends Fragment {
     Bundle savedInstanceState) {
 
     binding = FragmentMenuBinding.inflate(inflater, container, false);
-    //View root = binding.getRoot();
-    View root = inflater.inflate(R.layout.food_item_layout, container, false);
+    View root = binding.getRoot();
+    //View root = inflater.inflate(R.layout.food_item_layout, container, false);
     final TextView textView = binding.sectionLabel;
     pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
       @Override
