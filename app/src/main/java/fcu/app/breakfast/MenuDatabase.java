@@ -32,7 +32,9 @@ public class MenuDatabase {
     public void addMeal(String classification, String name, String description, int price, String filename) {
         ContentValues values = new ContentValues();
         values.put("classification", classification);
+        name = name.replace('-', ' ');
         values.put("name", name);
+        description = description.replace('-', ' ');
         values.put("description", description);
         values.put("price", price);
         values.put("filename", filename);
