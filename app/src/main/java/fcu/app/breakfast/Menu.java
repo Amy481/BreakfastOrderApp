@@ -42,7 +42,7 @@ public class Menu extends AppCompatActivity {
     TabLayout tabs = binding.tabs;
     tabs.setupWithViewPager(viewPager);
 
-    // 傳入菜單(建立菜單資料庫)
+    /* 傳入菜單(建立菜單資料庫) */
     // 開啟資料庫
     manudata = new MenuDatabase(this);
     manudata.open();

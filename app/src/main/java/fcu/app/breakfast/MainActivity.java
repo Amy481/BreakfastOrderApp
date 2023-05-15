@@ -20,6 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
   private ListView lvStores;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    /* 測試用，用來找資料放置位置
     File prjDir = this.getFilesDir();
     File helloText = new File(prjDir, "hello.txt");
 
@@ -56,6 +58,6 @@ public class MainActivity extends AppCompatActivity {
       throw new RuntimeException(e);
     } catch (IOException e){
       throw new RuntimeException(e);
-    }
+    }*/
   }
 }

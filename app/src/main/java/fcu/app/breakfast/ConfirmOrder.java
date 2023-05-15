@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class ConfirmOrder extends AppCompatActivity {
+public class ConfirmOrder extends AppCompatActivity { // 確認訂單介面
 
     private CartDatabase cartdata;
     private TextView orderPrice;
