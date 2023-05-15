@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.cart;
 
 import android.content.ContentValues;
 import android.database.Cursor;

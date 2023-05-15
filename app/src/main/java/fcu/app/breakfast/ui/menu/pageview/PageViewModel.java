@@ -1,4 +1,4 @@
-package fcu.app.breakfast.ui.main;
+package fcu.app.breakfast.ui.menu.pageview;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

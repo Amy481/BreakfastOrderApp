@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.menu;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,21 +10,23 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class StoresListViewAdapter extends BaseAdapter {
+import fcu.app.breakfast.R;
+
+public class ListViewAdapter extends BaseAdapter {
     private Context context;
-    private List<StoresItem> liststores;
-    public StoresListViewAdapter(Context context,List<StoresItem> liststores){
+    private List<FoodItem> listFoods;
+    public ListViewAdapter(Context context,List<FoodItem> listFoods){
         this.context=context;
-        this.liststores=liststores;
+        this.listFoods=listFoods;
     }
     @Override
     public int getCount() {
-        return liststores.size();
+        return listFoods.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return liststores.get(i);
+        return listFoods.get(i);
     }
 
     @Override
@@ -35,21 +37,21 @@ public class StoresListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null){
-            view= LayoutInflater.from(context).inflate(R.layout.stores_item_layout,viewGroup,false);
+            view= LayoutInflater.from(context).inflate(R.layout.food_item_layout,viewGroup,false);
         }
-        StoresItem food = liststores.get(i);
-        ImageView iv=view.findViewById(R.id.iv_stores);
+        FoodItem food = listFoods.get(i);
+        ImageView iv=view.findViewById(R.id.IV_FOOD);
         iv.setImageResource(food.getImageId());
         iv.setScaleType((ImageView.ScaleType.CENTER_CROP));
         iv.setAdjustViewBounds(true);
         iv.setMaxHeight(500);
         iv.setMaxWidth(500);
 
-        TextView tvFoodPrice = view.findViewById(R.id.tv_store_name);
-        tvFoodPrice.setText(String.valueOf(food.getstoreName()));
+        TextView tvFoodPrice = view.findViewById(R.id.TV_FOOD_PRICE);
+        tvFoodPrice.setText(String.valueOf(food.getFoodPrice()));
 
-        TextView tvFoodName = view.findViewById(R.id.tv_store_address);
-        tvFoodName.setText(String.valueOf(food.getstoreAddress()));
+        TextView tvFoodName = view.findViewById(R.id.TV_FOOD_NAME);
+        tvFoodName.setText(String.valueOf(food.getFoodName()));
         return view;
     }
 }

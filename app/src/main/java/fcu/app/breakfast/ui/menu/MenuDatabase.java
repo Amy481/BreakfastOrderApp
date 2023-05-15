@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.menu;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -26,9 +26,20 @@ public class MenuDatabase { // 菜單資料庫
 
     public void open(){
         db = activity.openOrCreateDatabase(DATABASE_NAME, 0, null);
-        db.execSQL(CREATE_MEAL_TABLE);
-    }
 
+        // 檢查資料表是否已存在
+        if (!isTableExists(db, "Meals")) {
+            db.execSQL(CREATE_MEAL_TABLE);
+        }
+    }
+    private boolean isTableExists(SQLiteDatabase db, String tableName) {
+        Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
+        boolean exists = (cursor != null) && (cursor.getCount() > 0);
+        if (cursor != null) {
+            cursor.close();
+        }
+        return exists;
+    }
     public void addMeal(String classification, String name, String description, int price, String filename) {
         ContentValues values = new ContentValues();
         values.put("classification", classification);

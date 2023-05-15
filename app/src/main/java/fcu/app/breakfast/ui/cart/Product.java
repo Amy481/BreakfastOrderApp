@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +15,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +22,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import fcu.app.breakfast.R;
+import fcu.app.breakfast.ui.menu.Menu;
+import fcu.app.breakfast.ui.menu.MenuDatabase;
 
 public class Product extends AppCompatActivity { // 商品介面
 
@@ -78,7 +81,9 @@ public class Product extends AppCompatActivity { // 商品介面
     // 商品文字資料投放到介面上
     tvmeal_name.setText(maelName);
     tvmeal_discrip.setText(mealdiscrip);
-    String option1, option2, option3;
+    String option1="";
+    String option2="";
+    String option3="";
     // 客製化選項投放
     if(classification.equals("burger")){  //可以自由新增
       option1 = "more sauce";
@@ -122,18 +127,21 @@ public class Product extends AppCompatActivity { // 商品介面
     spmealQuan.setOnItemSelectedListener(splistener);
 
     // 獲得客製化內容
-    String cbMessage = ",";
+    final String[] cbMessage = {","};
+    String finalOption1 = option1;
+    String finalOption2 = option2;
+    String finalOption3 = option3;
     CompoundButton.OnCheckedChangeListener cblistener = new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if(ckboption1.isChecked()) {
-          cbMessage = cbMessage + option1 + ",";
+          cbMessage[0] = cbMessage[0] + finalOption1 + ",";
         }
         if(ckboption2.isChecked()) {
-          cbMessage = cbMessage + option2 + ",";
+          cbMessage[0] = cbMessage[0] + finalOption2 + ",";
         }
         if(ckboption3.isChecked()) {
-          cbMessage = cbMessage + option3 + ",";
+          cbMessage[0] = cbMessage[0] + finalOption3 + ",";
         }
       }
     };
@@ -145,13 +153,14 @@ public class Product extends AppCompatActivity { // 商品介面
     View.OnClickListener onClickListener = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        String mealRemark;
         if(etmeal_remark.getText() == null){
-          String mealRemark = "";
+          mealRemark = "";
         } else{
-          String mealRemark = etmeal_remark.getText().toString();
+          mealRemark = etmeal_remark.getText().toString();
         }
 
-        cartdata.addMeal(maelName, mealprice, quantity, cbMessage, mealRemark);
+        cartdata.addMeal(maelName, mealprice, quantity, cbMessage[0], mealRemark);
         Intent intent = new Intent(Product.this, Menu.class);
         startActivity(intent);
       }

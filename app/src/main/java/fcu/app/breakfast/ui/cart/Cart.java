@@ -1,4 +1,4 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import fcu.app.breakfast.ui.menu.Menu;
+import fcu.app.breakfast.R;
 
 public class Cart extends AppCompatActivity { // 購物車界面
 

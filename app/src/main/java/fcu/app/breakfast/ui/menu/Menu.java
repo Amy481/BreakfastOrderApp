@@ -1,17 +1,13 @@
-package fcu.app.breakfast;
+package fcu.app.breakfast.ui.menu;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import fcu.app.breakfast.ui.main.SectionsPagerAdapter;
+import fcu.app.breakfast.ui.menu.pageview.SectionsPagerAdapter;
 import fcu.app.breakfast.databinding.ActivityMenuBinding;
 
 public class Menu extends AppCompatActivity {
@@ -48,7 +44,7 @@ public class Menu extends AppCompatActivity {
     manudata.open();
     // 讀取檔案((檔案要放在需要的位置
     File prjDir = this.getFilesDir();
-    File manuText = new File(prjDir, "manu.txt");
+    File manuText = new File(prjDir, "menu.txt");
 
     try {
       FileInputStream fis = new FileInputStream(manuText);
