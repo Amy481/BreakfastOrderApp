@@ -29,10 +29,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
   public Fragment getItem(int position) {
     // getItem is called to instantiate the fragment for the given page.
     // Return a PlaceholderFragment.
-    if (position == 0) {
-      return PlaceholderFragment.newInstance(position + 1);
-    }
     return PlaceholderFragment.newInstance(position + 1);
+    //return MenuFragment.newInstance(position + 1);
   }
 
   @Nullable

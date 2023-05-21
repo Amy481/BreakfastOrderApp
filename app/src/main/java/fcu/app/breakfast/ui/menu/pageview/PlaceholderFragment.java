@@ -1,25 +1,33 @@
 package fcu.app.breakfast.ui.menu.pageview;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import fcu.app.breakfast.R;
 import fcu.app.breakfast.databinding.FragmentMenuBinding;
+import fcu.app.breakfast.ui.menu.MenuDatabase;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
-
+  private TextView tvMealClass;
+  private MenuDatabase databaseHandler;
+  private ListView lvMeals;
   private static final String ARG_SECTION_NUMBER = "section_number";
 
   private PageViewModel pageViewModel;
@@ -49,20 +57,38 @@ public class PlaceholderFragment extends Fragment {
     @NonNull LayoutInflater inflater, ViewGroup container,
     Bundle savedInstanceState) {
 
-    binding = FragmentMenuBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+    databaseHandler = new MenuDatabase((AppCompatActivity) getActivity());
+    databaseHandler.open();
 
-    //View root = inflater.inflate(R.layout.food_item_layout, container, false);
-    final TextView textView = binding.sectionLabel;
-    pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-      @Override
-      public void onChanged(@Nullable String s) {
-        textView.setText(s);
-      }
-    });
-    return root;
+    View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+    lvMeals = rootView.findViewById(R.id.lv_menu_list);
+    tvMealClass=rootView.findViewById(R.id.tv_meal_class);
+    setMealClass("菜單");
+
+    showAllMeals();
+    return rootView;
+    //binding = FragmentMenuBinding.inflate(inflater, container, false);
+    //View root = binding.getRoot();
+
+    //View root = inflater.inflate(R.layout.fragment_menu, container, false);
+//    final TextView textView = binding.lvMenuList.sectionLabel;
+//    pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//      @Override
+//      public void onChanged(@Nullable String s) {
+//        textView.setText(s);
+//      }
+//    });
+    //return root;
   }
-
+  public void setMealClass(String mealClass) {
+      tvMealClass.setText(mealClass);
+  }
+  private void showAllMeals() {
+    Cursor cursor = databaseHandler.getMeal(1);
+    SimpleCursorAdapter adapter = new SimpleCursorAdapter(requireContext(), R.layout.food_item_layout,
+            cursor, new String[]{"name", "price"}, new int[]{R.id.TV_FOOD_NAME, R.id.TV_FOOD_PRICE}, 0);
+    lvMeals.setAdapter(adapter);
+  }
   @Override
   public void onDestroyView() {
     super.onDestroyView();
