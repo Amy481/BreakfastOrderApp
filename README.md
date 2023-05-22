@@ -1,1 +1,9 @@
-# IECS-1112-APP--3553-
+mainmeal chicken-burger fried-chicken-with-mustard 50 chickenB.pjg
+mainmeal eggsalad-sandwich boiled-egg-with-mayonnaise 40 eggsaladS.jpg
+mainmeal bacon-pasta fried-bacon-with-cream 75 baconP.jpg
+snack fries crispy-and-soft 30 fries.jpg
+snack nuggets chicken-nuggets 35 nuggets.jpg
+snack hot-dog with-ketchup 25 hotdog.jpg
+drink black-tea with-a-little-bit-fruity 15 blacktea.jpg
+drink milk-tea with-heavy-milk 25 milktea.jpg
+drink juice fresh-orange-juice 45 juice.jpg
