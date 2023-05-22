@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import fcu.app.breakfast.R;
 import fcu.app.breakfast.databinding.FragmentMenuBinding;
 import fcu.app.breakfast.ui.cart.Cart;
+import fcu.app.breakfast.ui.cart.CartDatabase;
 import fcu.app.breakfast.ui.cart.Product;
 import fcu.app.breakfast.ui.home.MainActivity;
 import fcu.app.breakfast.ui.menu.Menu;
@@ -33,9 +34,9 @@ import fcu.app.breakfast.ui.menu.MenuDatabase;
  */
 public class PlaceholderFragment extends Fragment {
   private TextView tvMealClass;
-
   private Button btnBills;
   private MenuDatabase databaseHandler;
+  private MenuDatabase databaseCart;
   private ListView lvMeals;
   private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -75,6 +76,7 @@ public class PlaceholderFragment extends Fragment {
     btnBills =rootView.findViewById(R.id.btn_checkout_bills);
 
     setMealClass("菜單");
+
     lvMeals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -83,14 +85,24 @@ public class PlaceholderFragment extends Fragment {
 
         Intent intent = new Intent(getActivity(), Product.class);
         intent.putExtra("productId", productId);
+        btnBills.setVisibility(View.VISIBLE);
         Toast.makeText(getActivity(),"餐點"+String.valueOf(productId), Toast.LENGTH_SHORT).show();
 
         startActivity(intent);
       }
     });
+    btnBills.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), Cart.class);
+        // 在這裡可以添加任何需要傳遞到 Cart 頁面的資料
+
+        // 啟動 Cart 頁面
+        startActivity(intent);
+      }
+    });
     //databaseHandler.addMeal("mainmeal" ,"chicken-burger" ,"fried-chicken-with-mustard ",50, "chickenB.pjg");
     showAllMeals();
-    btnBills.setVisibility(View.VISIBLE); //顯示
     return rootView;
   }
   public void setMealClass(String mealClass) {
