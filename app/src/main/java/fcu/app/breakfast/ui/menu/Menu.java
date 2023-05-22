@@ -1,6 +1,10 @@
 package fcu.app.breakfast.ui.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -16,11 +20,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import fcu.app.breakfast.R;
+import fcu.app.breakfast.ui.cart.Cart;
 import fcu.app.breakfast.ui.menu.pageview.SectionsPagerAdapter;
 import fcu.app.breakfast.databinding.ActivityMenuBinding;
 
 public class Menu extends AppCompatActivity {
-
   private ActivityMenuBinding binding;
 
   private MenuDatabase manudata;
