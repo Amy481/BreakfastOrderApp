@@ -29,9 +29,19 @@ public class CartDatabase { // 購物車資料庫
 
     public void open(){
         db = activity.openOrCreateDatabase(DATABASE_NAME, 0, null);
-        db.execSQL(CREATE_CART_TABLE);
-    }
+        if (!isTableExists(db, "Shopping")) {
+            db.execSQL(CREATE_CART_TABLE);
+        }
 
+    }
+    private boolean isTableExists(SQLiteDatabase db, String tableName) {
+        Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
+        boolean exists = (cursor != null) && (cursor.getCount() > 0);
+        if (cursor != null) {
+            cursor.close();
+        }
+        return exists;
+    }
     public void addMeal(String name, int unitprice, int quantity, String customized, String remarke) {
         ContentValues values = new ContentValues();
         values.put("name", name);

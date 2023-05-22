@@ -1,5 +1,7 @@
 package fcu.app.breakfast.ui.cart;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +32,7 @@ import fcu.app.breakfast.ui.menu.MenuDatabase;
 
 public class Product extends AppCompatActivity { // 商品介面
 
-  private int id; // 假設從菜單那裡得到的id
+  //private int id; // 假設從菜單那裡得到的id
   private MenuDatabase menudata; // 菜單資料庫
   private CartDatabase cartdata; // 購物車資料庫
 
@@ -37,6 +40,7 @@ public class Product extends AppCompatActivity { // 商品介面
   private TextView tvmeal_name;
   private ImageView imgmeal_img;
   private TextView tvmeal_discrip;
+  private TextView tvmeal_price;
   private CheckBox ckboption1;
   private CheckBox ckboption2;
   private CheckBox ckboption3;
@@ -51,6 +55,12 @@ public class Product extends AppCompatActivity { // 商品介面
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_product);
+
+    // 獲取傳遞的產品 ID
+    Intent intent = getIntent();
+    int id = intent.getIntExtra("productId", -1); // 0 是預設值，可以根據需要修改
+    Toast.makeText(Product.this,"跳轉"+id, Toast.LENGTH_SHORT).show();
+
     // 開菜單資料庫抓特定資料
     menudata = new MenuDatabase(this);
     menudata.open();
@@ -61,6 +71,7 @@ public class Product extends AppCompatActivity { // 商品介面
     tvmeal_name = findViewById(R.id.tv_pd_meal_name);
     imgmeal_img = findViewById(R.id.img_pd_meal);
     tvmeal_discrip = findViewById(R.id.tv_pd_meal_descrip);
+    tvmeal_price = findViewById(R.id.tv_pd_meal_price);
     ckboption1 = findViewById(R.id.ckb_first);
     ckboption2 = findViewById(R.id.ckb_second);
     ckboption3 = findViewById(R.id.ckb_third);
@@ -70,6 +81,10 @@ public class Product extends AppCompatActivity { // 商品介面
 
     // 獲得特定商品資料
     Cursor cursor = menudata.getMeal(id); // 只會有一筆
+    Toast.makeText(Product.this,"getMeal "+id, Toast.LENGTH_SHORT).show();
+    if (cursor != null && cursor.moveToFirst()) {
+      // 繼續提取資料的程式碼
+
 
     // 得到的所有商品資料
     String classification = cursor.getString(1); // 類別 用來識別客製化要放的
@@ -81,6 +96,8 @@ public class Product extends AppCompatActivity { // 商品介面
     // 商品文字資料投放到介面上
     tvmeal_name.setText(maelName);
     tvmeal_discrip.setText(mealdiscrip);
+    String mealPrice="一份 "+String.valueOf(mealprice)+" 元";
+    tvmeal_price.setText(mealPrice);
     String option1="";
     String option2="";
     String option3="";
@@ -96,7 +113,7 @@ public class Product extends AppCompatActivity { // 商品介面
 
     // 投放圖片
     File prjDir = this.getFilesDir();
-
+/*
     try {
       FileInputStream mealImgFis = openFileInput(img_file);
       Bitmap bitmap = BitmapFactory.decodeStream(mealImgFis);
@@ -107,7 +124,7 @@ public class Product extends AppCompatActivity { // 商品介面
     } catch (IOException e){
       throw new RuntimeException(e);
     }
-
+ */
     // 時間選項
 
     ArrayAdapter<String> spAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, numbers);
@@ -168,5 +185,6 @@ public class Product extends AppCompatActivity { // 商品介面
 
     btnadd_meal.setOnClickListener(onClickListener);
 
+  }
   }
 }

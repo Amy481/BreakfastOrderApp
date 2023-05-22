@@ -1,14 +1,18 @@
 package fcu.app.breakfast.ui.menu.pageview;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -19,13 +23,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import fcu.app.breakfast.R;
 import fcu.app.breakfast.databinding.FragmentMenuBinding;
+import fcu.app.breakfast.ui.cart.Cart;
+import fcu.app.breakfast.ui.cart.Product;
+import fcu.app.breakfast.ui.home.MainActivity;
+import fcu.app.breakfast.ui.menu.Menu;
 import fcu.app.breakfast.ui.menu.MenuDatabase;
-
 /**
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
   private TextView tvMealClass;
+
+  private Button btnBills;
   private MenuDatabase databaseHandler;
   private ListView lvMeals;
   private static final String ARG_SECTION_NUMBER = "section_number";
@@ -62,23 +71,27 @@ public class PlaceholderFragment extends Fragment {
 
     View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
     lvMeals = rootView.findViewById(R.id.lv_menu_list);
-    tvMealClass=rootView.findViewById(R.id.tv_meal_class);
+    tvMealClass = rootView.findViewById(R.id.tv_meal_class);
+    btnBills =rootView.findViewById(R.id.btn_checkout_bills);
+
     setMealClass("菜單");
+    lvMeals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+        @SuppressLint("Range") int productId = cursor.getInt(cursor.getColumnIndex("_id"));
 
+        Intent intent = new Intent(getActivity(), Product.class);
+        intent.putExtra("productId", productId);
+        Toast.makeText(getActivity(),"餐點"+String.valueOf(productId), Toast.LENGTH_SHORT).show();
+
+        startActivity(intent);
+      }
+    });
+    //databaseHandler.addMeal("mainmeal" ,"chicken-burger" ,"fried-chicken-with-mustard ",50, "chickenB.pjg");
     showAllMeals();
+    btnBills.setVisibility(View.VISIBLE); //顯示
     return rootView;
-    //binding = FragmentMenuBinding.inflate(inflater, container, false);
-    //View root = binding.getRoot();
-
-    //View root = inflater.inflate(R.layout.fragment_menu, container, false);
-//    final TextView textView = binding.lvMenuList.sectionLabel;
-//    pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//      @Override
-//      public void onChanged(@Nullable String s) {
-//        textView.setText(s);
-//      }
-//    });
-    //return root;
   }
   public void setMealClass(String mealClass) {
       tvMealClass.setText(mealClass);
