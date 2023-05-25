@@ -72,4 +72,8 @@ public class MenuDatabase { // 菜單資料庫
 
     public void close() {
     }
+
+    public void deleteAll(){
+        db.execSQL("delete from Meals");
+    }
 }
