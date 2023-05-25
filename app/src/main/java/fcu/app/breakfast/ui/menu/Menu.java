@@ -45,8 +45,12 @@ public class Menu extends AppCompatActivity {
 
     /* 傳入菜單(建立菜單資料庫) */
     // 開啟資料庫
+    BuildMenu.builingMenu(this);
+
     manudata = new MenuDatabase(this);
     manudata.open();
+
+    /*
     // 讀取檔案((檔案要放在需要的位置
     File prjDir = this.getFilesDir();
     File manuText = new File(prjDir, "menu.txt");
@@ -69,7 +73,7 @@ public class Menu extends AppCompatActivity {
       throw new RuntimeException(e);
     } catch (IOException e){
       throw new RuntimeException(e);
-    }
+    }*/
 
   }
 }
