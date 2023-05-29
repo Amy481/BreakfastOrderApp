@@ -48,7 +48,8 @@ public class ImageCursorAdapter extends SimpleCursorAdapter {
 
         iv.setImageResource(resID);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
+        iv.setAdjustViewBounds(true);
+        iv.setMaxHeight(300);
 
         TextView fname = (TextView) v.findViewById(R.id.TV_FOOD_NAME);
         fname.setText(mealname);
