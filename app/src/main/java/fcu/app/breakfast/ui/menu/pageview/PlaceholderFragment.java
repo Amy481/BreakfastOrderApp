@@ -109,7 +109,14 @@ public class PlaceholderFragment extends Fragment {
       tvMealClass.setText(mealClass);
   }
   private void showAllMeals() {
-    Cursor cursor = databaseHandler.getMeal(1);
+    int index = getArguments().getInt(ARG_SECTION_NUMBER);
+    Cursor cursor = null;
+    if(index==1)
+    {cursor = databaseHandler.getClassMeal("mainmeal");}
+    else if(index==2)
+    {cursor = databaseHandler.getClassMeal("snack");}
+    else if(index==3)
+    {cursor = databaseHandler.getClassMeal("drink");}
     SimpleCursorAdapter adapter = new SimpleCursorAdapter(requireContext(), R.layout.food_item_layout,
             cursor, new String[]{"name", "price"}, new int[]{R.id.TV_FOOD_NAME, R.id.TV_FOOD_PRICE}, 0);
     lvMeals.setAdapter(adapter);
