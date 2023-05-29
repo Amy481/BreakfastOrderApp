@@ -12,15 +12,20 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import fcu.app.breakfast.ui.cart.CartDatabase;
 import fcu.app.breakfast.ui.menu.Menu;
 import fcu.app.breakfast.R;
 
 public class MainActivity extends AppCompatActivity {
-
+  private CartDatabase databasecart;
   private ListView lvStores;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    databasecart = new CartDatabase(this);
+    databasecart.open();
+    databasecart.deleteAll();
+    databasecart.close();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
