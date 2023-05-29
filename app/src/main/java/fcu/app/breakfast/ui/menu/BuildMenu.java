@@ -15,11 +15,11 @@ public class BuildMenu {
         manudata.deleteAll();
 
         // 資料
-        String[] mealliat = {"mainmeal chicken-burger fried-chicken-with-mustard 50 burger.png",
-                "mainmeal eggsalad-sandwich boiled-egg-with-mayonnaise 40 eggsaladS.jpg",
-                "mainmeal bacon-pasta fried-bacon-with-cream 75 baconP.jpg",
-                "snack fries crispy-and-soft 30 fries.png",
-                "drink juice fresh-orange-juice 45 juice.png"};
+        String[] mealliat = {"mainmeal chicken-burger fried-chicken-with-mustard 50 image_1",
+                "mainmeal eggsalad-sandwich boiled-egg-with-mayonnaise 40 image_2",
+                "mainmeal bacon-pasta fried-bacon-with-cream 75 image_3",
+                "snack fries crispy-and-soft 30 image_1",
+                "drink juice fresh-orange-juice 45 image_2"};
 
         // 讀取陣列 分割字串
         for(String x: mealliat){
