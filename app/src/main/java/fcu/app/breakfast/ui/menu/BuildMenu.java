@@ -1,10 +1,13 @@
 package fcu.app.breakfast.ui.menu;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class BuildMenu {
 
-    private static void builingMenu(){
+    static void builingMenu(AppCompatActivity activity){
 
         MenuDatabase manudata;
+
 
         manudata = new MenuDatabase(activity);
         manudata.open();

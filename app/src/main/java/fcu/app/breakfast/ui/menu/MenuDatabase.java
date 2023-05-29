@@ -53,7 +53,7 @@ public class MenuDatabase { // 菜單資料庫
     }
 
     public Cursor getClassMeal(String classification){
-        Cursor cursor = db.rawQuery("SELECT * FROM Meals where classification = "+classification, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Meals where classification = '"+classification+"'", null);
         /*while (cursor.moveToNext()){
             String mealName = cursor.getString(1);
             Toast.makeText(activity, "Add Meal" + mealName, Toast.LENGTH_SHORT).show();
