@@ -39,8 +39,8 @@ public class ConfirmOrder extends AppCompatActivity { // 確認訂單介面
         orderlist.setAdapter(adaptor);
 
         // 時間
-        String getTime = cartdata.getGetMealTime();
-        orderTime.setText("time to get meal: " + getTime);
+        String selectedMealTime = getIntent().getStringExtra("time");
+        orderTime.setText("time to get meal: " + selectedMealTime);
 
         // 總金額
         int price_of_all = cartdata.getAllprice();

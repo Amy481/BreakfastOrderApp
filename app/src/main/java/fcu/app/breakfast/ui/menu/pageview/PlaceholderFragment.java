@@ -36,7 +36,7 @@ public class PlaceholderFragment extends Fragment {
   private TextView tvMealClass;
   private Button btnBills;
   private MenuDatabase databaseHandler;
-  private MenuDatabase databaseCart;
+  private CartDatabase databaseCart;
   private ListView lvMeals;
   private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -85,12 +85,22 @@ public class PlaceholderFragment extends Fragment {
 
         Intent intent = new Intent(getActivity(), Product.class);
         intent.putExtra("productId", productId);
-        btnBills.setVisibility(View.VISIBLE);
+
         Toast.makeText(getActivity(),"餐點"+String.valueOf(productId), Toast.LENGTH_SHORT).show();
 
         startActivity(intent);
       }
     });
+
+    databaseCart = new CartDatabase((AppCompatActivity) getActivity());
+    databaseCart.open();
+    if (databaseCart.isTableExists(databaseCart.getDatabase(), "Shopping") && databaseCart.getCartItemCount() > 0) {
+      btnBills.setVisibility(View.VISIBLE);
+    } else {
+      btnBills.setVisibility(View.GONE);
+    }
+    databaseCart.close();
+
     btnBills.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {

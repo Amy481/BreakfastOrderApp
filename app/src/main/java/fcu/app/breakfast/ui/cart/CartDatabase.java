@@ -34,7 +34,18 @@ public class CartDatabase { // 購物車資料庫
         }
 
     }
-    private boolean isTableExists(SQLiteDatabase db, String tableName) {
+    public int getCartItemCount() {
+        int count = 0;
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Shopping", null);
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+
+    public boolean isTableExists(SQLiteDatabase db, String tableName) {
         Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
         boolean exists = (cursor != null) && (cursor.getCount() > 0);
         if (cursor != null) {
@@ -86,6 +97,15 @@ public class CartDatabase { // 購物車資料庫
             allPrice = allPrice + (price*num);
         }
         return allPrice;
+    }
+    public void deleteAll(){
+        db.execSQL("delete from Shopping");
+    }
+    public SQLiteDatabase getDatabase() {
+        return db;
+    }
+    public void close() {
+        db.close();
     }
 }
 

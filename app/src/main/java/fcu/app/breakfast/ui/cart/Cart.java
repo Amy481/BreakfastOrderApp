@@ -16,6 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import fcu.app.breakfast.ui.menu.Menu;
 import fcu.app.breakfast.R;
 
@@ -29,7 +35,7 @@ public class Cart extends AppCompatActivity { // 購物車界面
   private Spinner spcartTime;
   private CartDatabase cartdata; // 購物車資料庫
 
-  private String[] time = {};
+  private String[] time = {getCurrentTime(0),getCurrentTime(5),getCurrentTime(10),getCurrentTime(15)};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,7 @@ public class Cart extends AppCompatActivity { // 購物車界面
     allprice.setText("total: " + Integer.toString(price_of_all));
 
     // 投放時間列表和抓取
-    this.getTime();
+    //this.getTime();
     ArrayAdapter<String> spAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, time);
     spAdaptor.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
     spcartTime.setAdapter(spAdaptor);
@@ -101,6 +107,7 @@ public class Cart extends AppCompatActivity { // 購物車界面
           Toast.makeText(Cart.this,"please choose the time", Toast.LENGTH_SHORT).show();
         } else {
           Intent intent = new Intent(Cart.this, ConfirmOrder.class);
+          intent.putExtra("time", cartdata.getGetMealTime());
           startActivity(intent);
         }
 
@@ -113,4 +120,21 @@ public class Cart extends AppCompatActivity { // 購物車界面
   public void getTime(){
 
   }
+  private String getCurrentTime(int minutesToAdd) {
+    TimeZone taiwanTimeZone = TimeZone.getTimeZone("Asia/Taipei");
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeZone(taiwanTimeZone);
+
+    calendar.add(Calendar.MINUTE, minutesToAdd);
+
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    int minute = calendar.get(Calendar.MINUTE);
+
+    String hourString = String.format("%02d", hour);
+    String minuteString = String.format("%02d", minute);
+
+    return hourString + ":" + minuteString;
+  }
+
 }
