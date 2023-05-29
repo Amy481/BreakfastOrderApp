@@ -14,11 +14,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import fcu.app.breakfast.R;
@@ -26,8 +24,7 @@ import fcu.app.breakfast.databinding.FragmentMenuBinding;
 import fcu.app.breakfast.ui.cart.Cart;
 import fcu.app.breakfast.ui.cart.CartDatabase;
 import fcu.app.breakfast.ui.cart.Product;
-import fcu.app.breakfast.ui.home.MainActivity;
-import fcu.app.breakfast.ui.menu.Menu;
+import fcu.app.breakfast.ui.menu.ImageCursorAdapter;
 import fcu.app.breakfast.ui.menu.MenuDatabase;
 /**
  * A placeholder fragment containing a simple view.
@@ -127,8 +124,11 @@ public class PlaceholderFragment extends Fragment {
     {cursor = databaseHandler.getClassMeal("snack");}
     else if(index==3)
     {cursor = databaseHandler.getClassMeal("drink");}
-    SimpleCursorAdapter adapter = new SimpleCursorAdapter(requireContext(), R.layout.food_item_layout,
-            cursor, new String[]{"name", "price"}, new int[]{R.id.TV_FOOD_NAME, R.id.TV_FOOD_PRICE}, 0);
+    /*SimpleCursorAdapter adapter = new SimpleCursorAdapter(requireContext(), R.layout.food_item_layout,
+            cursor, new String[]{"name", "price"}, new int[]{R.id.TV_FOOD_NAME, R.id.TV_FOOD_PRICE}, 0);*/
+    SimpleCursorAdapter adapter = new ImageCursorAdapter(this.getActivity(), R.layout.food_item_layout,
+            cursor, new String[]{"name", "price", "filename"},
+            new int[]{R.id.TV_FOOD_NAME, R.id.TV_FOOD_PRICE, R.id.IMG_FOOD});
     lvMeals.setAdapter(adapter);
   }
   @Override

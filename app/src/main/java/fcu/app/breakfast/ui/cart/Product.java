@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,7 +70,6 @@ public class Product extends AppCompatActivity { // 商品介面
 
     // 抓介面id
     tvmeal_name = findViewById(R.id.tv_pd_meal_name);
-    imgmeal_img = findViewById(R.id.img_pd_meal);
     tvmeal_discrip = findViewById(R.id.tv_pd_meal_descrip);
     tvmeal_price = findViewById(R.id.tv_pd_meal_price);
     ckboption1 = findViewById(R.id.ckb_first);
@@ -112,7 +112,12 @@ public class Product extends AppCompatActivity { // 商品介面
     ckboption3.setText(option3);
 
     // 投放圖片
-    File prjDir = this.getFilesDir();
+    int resID = getResources().getIdentifier(img_file , "drawable", getPackageName());
+
+    ImageView iv = findViewById(R.id.img_pd_meal);
+    iv.setImageResource(resID);
+    iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
 /*
     try {
       FileInputStream mealImgFis = openFileInput(img_file);
