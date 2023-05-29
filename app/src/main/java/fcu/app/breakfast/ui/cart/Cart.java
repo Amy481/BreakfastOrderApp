@@ -59,8 +59,8 @@ public class Cart extends AppCompatActivity { // 購物車界面
     // 獲得購物車資料，不只一筆
     Cursor cursor = cartdata.getALLCart();
     SimpleCursorAdapter adaptor = new SimpleCursorAdapter(this, R.layout.meal_items_in_cart,
-            cursor, new String[] {"name", "customized", "remarke", "unitprice", "quantity"},
-            new int[] {R.id.cart_meal_name, R.id.cart_meal_custo, R.id.cart_meal_remark, R.id.cart_meal_price, R.id.cart_meal_quan}, 0);
+      cursor, new String[] {"name", "customized", "remarke", "unitprice", "quantity"},
+      new int[] {R.id.cart_meal_name, R.id.cart_meal_custo, R.id.cart_meal_remark, R.id.cart_meal_price, R.id.cart_meal_quan}, 0);
 
     cartlist.setAdapter(adaptor);
 
