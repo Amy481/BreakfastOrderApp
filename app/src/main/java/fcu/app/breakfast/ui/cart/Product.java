@@ -101,11 +101,20 @@ public class Product extends AppCompatActivity { // 商品介面
     String option1="";
     String option2="";
     String option3="";
+
     // 客製化選項投放
-    if(classification.equals("burger")){  //可以自由新增
-      option1 = "more sauce";
-      option2 = "more veg";
-      option3 = "less sauce";
+    if(classification.equals("mainmeal")){  //可以自由新增
+      option1 = "多加醬";
+      option2 = "不加醬";
+      option3 = "多加蔬菜";
+    } else if(classification.equals("snack")){
+      option1 = "多加胡椒";
+      option2 = "改成番茄醬";
+      option3 = "不需調味";
+    } else if(classification.equals("drink")){
+      option1 = "去冰";
+      option2 = "少冰";
+      option3 = "無糖";
     }
     ckboption1.setText(option1);
     ckboption2.setText(option2);
@@ -118,18 +127,6 @@ public class Product extends AppCompatActivity { // 商品介面
     iv.setImageResource(resID);
     iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-/*
-    try {
-      FileInputStream mealImgFis = openFileInput(img_file);
-      Bitmap bitmap = BitmapFactory.decodeStream(mealImgFis);
-      mealImgFis.close();
-      imgmeal_img.setImageBitmap(bitmap);
-    } catch (FileNotFoundException e){
-      throw new RuntimeException(e);
-    } catch (IOException e){
-      throw new RuntimeException(e);
-    }
- */
     // 時間選項
 
     ArrayAdapter<String> spAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, numbers);
