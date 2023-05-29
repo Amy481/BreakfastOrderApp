@@ -40,12 +40,9 @@ public class ListViewAdapter extends BaseAdapter {
             view= LayoutInflater.from(context).inflate(R.layout.food_item_layout,viewGroup,false);
         }
         FoodItem food = listFoods.get(i);
-//        ImageView iv=view.findViewById(R.id.IV_FOOD);
-//        iv.setImageResource(food.getImageId());
-//        iv.setScaleType((ImageView.ScaleType.CENTER_CROP));
-//        iv.setAdjustViewBounds(true);
-//        iv.setMaxHeight(500);
-//        iv.setMaxWidth(500);
+        ImageView iv=view.findViewById(R.id.IMG_FOOD);
+        iv.setImageResource(food.getImageId());
+        iv.setScaleType((ImageView.ScaleType.CENTER_CROP));
 
         TextView tvFoodPrice = view.findViewById(R.id.TV_FOOD_PRICE);
         tvFoodPrice.setText(String.valueOf(food.getFoodPrice()));

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import fcu.app.breakfast.ui.home.MainActivity;
 import fcu.app.breakfast.ui.menu.Menu;
 import fcu.app.breakfast.R;
 
@@ -64,7 +66,7 @@ public class Cart extends AppCompatActivity { // 購物車界面
 
     // 訂單金額投放
     int price_of_all = cartdata.getAllprice();
-    allprice.setText("total: " + Integer.toString(price_of_all));
+    allprice.setText("總金額: " + Integer.toString(price_of_all));
 
     // 投放時間列表和抓取
     //this.getTime();
@@ -109,6 +111,18 @@ public class Cart extends AppCompatActivity { // 購物車界面
           Intent intent = new Intent(Cart.this, ConfirmOrder.class);
           intent.putExtra("time", cartdata.getGetMealTime());
           startActivity(intent);
+          // 延遲5秒後返回主頁面
+          Handler handler = new Handler();
+          handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              Intent mainIntent = new Intent(Cart.this, MainActivity.class);
+              mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              startActivity(mainIntent);
+              finish();//結束當下頁面
+            }
+          }, 5000);//5秒
+
         }
 
       }
