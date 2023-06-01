@@ -31,36 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
     lvStores=findViewById(R.id.lv_stores);
 
-    List<StoresItem> srores=new ArrayList<StoresItem>();
-    srores.add(new StoresItem(R.drawable.image_1,"分店一","分店一地址"));
-    srores.add(new StoresItem(R.drawable.image_2,"分店二","分店二地址"));
-    srores.add(new StoresItem(R.drawable.image_3,"分店三","分店三地址"));
-    StoresListViewAdapter adapter=new StoresListViewAdapter(this,srores);
+    List<StoresItem> stores=new ArrayList<StoresItem>();
+    stores.add(new StoresItem(R.drawable.icon,"逢甲店","台中市西屯區逢甲路100號"));
+    stores.add(new StoresItem(R.drawable.icon,"河南店","台中市南區河南路200號"));
+    stores.add(new StoresItem(R.drawable.icon,"文華店","台中市北區文華路300號"));
+    StoresListViewAdapter adapter=new StoresListViewAdapter(this,stores);
     lvStores.setAdapter(adapter);
 
     lvStores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(MainActivity.this,"選擇"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+        StoresItem selectedStore = stores.get(position);
+        String selectedStoreName = selectedStore.getstoreName();
+
+        Toast.makeText(MainActivity.this,"選擇"+selectedStoreName, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, Menu.class);
         startActivity(intent);
       }
     });
-
-    /* 測試用，用來找資料放置位置
-    File prjDir = this.getFilesDir();
-    File helloText = new File(prjDir, "hello.txt");
-
-    try {
-      FileOutputStream out = new FileOutputStream(helloText);
-      String hello = "Hello World!\nHello FCU!";
-      byte[] helloBytes = hello.getBytes();
-      out.write(helloBytes);
-      out.close();
-    } catch (FileNotFoundException e){
-      throw new RuntimeException(e);
-    } catch (IOException e){
-      throw new RuntimeException(e);
-    }*/
   }
 }

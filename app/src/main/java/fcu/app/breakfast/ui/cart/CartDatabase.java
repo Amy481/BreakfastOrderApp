@@ -3,6 +3,7 @@ package fcu.app.breakfast.ui.cart;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -106,6 +107,10 @@ public class CartDatabase { // 購物車資料庫
     }
     public void close() {
         db.close();
+    }
+
+    public void deleteCartItem(int cartItemId) {
+        db.delete("Shopping", "_id = ?", new String[]{String.valueOf(cartItemId)});
     }
 }
 

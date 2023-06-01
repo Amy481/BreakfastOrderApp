@@ -69,10 +69,9 @@ public class PlaceholderFragment extends Fragment {
 
     View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
     lvMeals = rootView.findViewById(R.id.lv_menu_list);
-    tvMealClass = rootView.findViewById(R.id.tv_meal_class);
+    //tvMealClass = rootView.findViewById(R.id.tv_meal_class);
     btnBills =rootView.findViewById(R.id.btn_checkout_bills);
 
-    setMealClass("菜單");
 
     lvMeals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
@@ -83,7 +82,7 @@ public class PlaceholderFragment extends Fragment {
         Intent intent = new Intent(getActivity(), Product.class);
         intent.putExtra("productId", productId);
 
-        Toast.makeText(getActivity(),"餐點"+String.valueOf(productId), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"餐點"+String.valueOf(productId).get, Toast.LENGTH_SHORT).show();
 
         startActivity(intent);
       }
@@ -112,9 +111,7 @@ public class PlaceholderFragment extends Fragment {
     showAllMeals();
     return rootView;
   }
-  public void setMealClass(String mealClass) {
-      tvMealClass.setText(mealClass);
-  }
+
   private void showAllMeals() {
     int index = getArguments().getInt(ARG_SECTION_NUMBER);
     Cursor cursor = null;

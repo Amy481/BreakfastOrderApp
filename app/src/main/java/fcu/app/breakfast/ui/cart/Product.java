@@ -60,7 +60,7 @@ public class Product extends AppCompatActivity { // 商品介面
     // 獲取傳遞的產品 ID
     Intent intent = getIntent();
     int id = intent.getIntExtra("productId", -1); // 0 是預設值，可以根據需要修改
-    Toast.makeText(Product.this,"跳轉"+id, Toast.LENGTH_SHORT).show();
+    //Toast.makeText(Product.this,"跳轉"+id, Toast.LENGTH_SHORT).show();
 
     // 開菜單資料庫抓特定資料
     menudata = new MenuDatabase(this);
@@ -81,7 +81,7 @@ public class Product extends AppCompatActivity { // 商品介面
 
     // 獲得特定商品資料
     Cursor cursor = menudata.getMeal(id); // 只會有一筆
-    Toast.makeText(Product.this,"getMeal "+id, Toast.LENGTH_SHORT).show();
+    //Toast.makeText(Product.this,"getMeal "+id, Toast.LENGTH_SHORT).show();
     if (cursor != null && cursor.moveToFirst()) {
       // 繼續提取資料的程式碼
 
@@ -102,10 +102,18 @@ public class Product extends AppCompatActivity { // 商品介面
     String option2="";
     String option3="";
     // 客製化選項投放
-    if(classification.equals("burger")){  //可以自由新增
-      option1 = "more sauce";
-      option2 = "more veg";
-      option3 = "less sauce";
+    if(classification.equals("mainmeal")){  //可以自由新增
+      option1 = "加蛋";
+      option2 = "加醬";
+      option3 = "去青菜";
+    } else if (classification.equals("snack")) {
+      option1 = "附辣醬";
+      option2 = "附番茄醬";
+      option3 = "加胡椒";
+    }else if (classification.equals("drink")) {
+      option1 = "附杯套";
+      option2 = "少冰";
+      option3 = "不加糖";
     }
     ckboption1.setText(option1);
     ckboption2.setText(option2);
@@ -152,21 +160,30 @@ public class Product extends AppCompatActivity { // 商品介面
     spmealQuan.setOnItemSelectedListener(splistener);
 
     // 獲得客製化內容
-    final String[] cbMessage = {","};
+    final String[] cbMessage = {" "};
+
     String finalOption1 = option1;
     String finalOption2 = option2;
     String finalOption3 = option3;
     CompoundButton.OnCheckedChangeListener cblistener = new CompoundButton.OnCheckedChangeListener() {
       @Override
-      public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(ckboption1.isChecked()) {
+      public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        if (ckboption1.isChecked() && !cbMessage[0].contains(finalOption1)) {
           cbMessage[0] = cbMessage[0] + finalOption1 + ",";
+        } else if (!ckboption1.isChecked() && cbMessage[0].contains(finalOption1)) {
+          cbMessage[0] = cbMessage[0].replace(finalOption1 + ",", "");
         }
-        if(ckboption2.isChecked()) {
+
+        if (ckboption2.isChecked() && !cbMessage[0].contains(finalOption2)) {
           cbMessage[0] = cbMessage[0] + finalOption2 + ",";
+        } else if (!ckboption2.isChecked() && cbMessage[0].contains(finalOption2)) {
+          cbMessage[0] = cbMessage[0].replace(finalOption2 + ",", "");
         }
-        if(ckboption3.isChecked()) {
+
+        if (ckboption3.isChecked() && !cbMessage[0].contains(finalOption3)) {
           cbMessage[0] = cbMessage[0] + finalOption3 + ",";
+        } else if (!ckboption3.isChecked() && cbMessage[0].contains(finalOption3)) {
+          cbMessage[0] = cbMessage[0].replace(finalOption3 + ",", "");
         }
       }
     };
@@ -180,7 +197,7 @@ public class Product extends AppCompatActivity { // 商品介面
       public void onClick(View view) {
         String mealRemark;
         if(etmeal_remark.getText() == null){
-          mealRemark = "";
+          mealRemark = " ";
         } else{
           mealRemark = etmeal_remark.getText().toString();
         }

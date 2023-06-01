@@ -21,7 +21,7 @@ public class BuildMenu {
                 "mainmeal 雞柳捲餅 柔韌餅皮捲炸雞柳搭配美乃滋 45 burrito",
                 "mainmeal 可頌三明治 酥到掉渣可頌麵包夾火腿生菜 45 croissant",
                 "mainmeal 蛋餅 經典不敗 35 eggcake",
-                "mainmeal 培根義麵 煎培根與白醬義大利麵 75 image_3",
+                "mainmeal 培根義麵 煎培根與白醬義大利麵 75 pasta",
                 "mainmeal 小籠包 一籠7顆，湯汁豐富 70 xiaolongbao",
                 "snack 薯條 外酥內軟他配番茄醬 30 fries",
                 "snack 荷包蛋 一顆單面煎太陽蛋 15 egg",
@@ -34,7 +34,7 @@ public class BuildMenu {
                 "drink 紅茶 古早味紅茶 15 blacktea",
                 "drink 奶茶 香甜奶茶 25 milktea",
                 "drink 豆漿 純正豆香 15 soybean",
-                "drink 玉米濃湯 限量供應 35 cornsoup"};
+                "snack 玉米濃湯 限量供應 35 cornsoup"};
 
         // 讀取陣列 分割字串
         for(String x: mealliat){

@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="商品名稱"
-            android:textAlignment="textEnd"
+            android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="20sp" />
 
@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="訂單客製化"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -31,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="訂單備註"
-            android:textAlignment="textEnd"
+            android:textAlignment="textStart"
             android:textSize="14sp" />
 
         <TextView
@@ -39,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="單價"
-            android:textAlignment="textEnd"
+            android:textAlignment="viewEnd"
             android:textSize="16sp" />
 
         <TextView

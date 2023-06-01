@@ -1,7 +1,10 @@
 package fcu.app.breakfast.ui.cart;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -58,11 +61,24 @@ public class Cart extends AppCompatActivity { // 購物車界面
     // 投放購物車列表
     // 獲得購物車資料，不只一筆
     Cursor cursor = cartdata.getALLCart();
+
     SimpleCursorAdapter adaptor = new SimpleCursorAdapter(this, R.layout.meal_items_in_cart,
             cursor, new String[] {"name", "customized", "remarke", "unitprice", "quantity"},
             new int[] {R.id.cart_meal_name, R.id.cart_meal_custo, R.id.cart_meal_remark, R.id.cart_meal_price, R.id.cart_meal_quan}, 0);
 
     cartlist.setAdapter(adaptor);
+
+
+    cartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+        String mealName = cursor.getString(cursor.getColumnIndex("name"));
+
+        showAlertDialog("提醒","確認刪除"+mealName+"?",cursor.getPosition());
+      }
+    });
+
 
     // 訂單金額投放
     int price_of_all = cartdata.getAllprice();
@@ -91,7 +107,6 @@ public class Cart extends AppCompatActivity { // 購物車界面
     View.OnClickListener backlistener = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         Intent intent = new Intent(Cart.this, Menu.class);
         startActivity(intent);
       }
@@ -103,7 +118,6 @@ public class Cart extends AppCompatActivity { // 購物車界面
     View.OnClickListener sendlistener = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         // 加一個防呆: 要有選擇時間
         if(cartdata.getGetMealTime() == null){
           Toast.makeText(Cart.this,"please choose the time", Toast.LENGTH_SHORT).show();
@@ -122,18 +136,53 @@ public class Cart extends AppCompatActivity { // 購物車界面
               finish();//結束當下頁面
             }
           }, 5000);//5秒
-
         }
-
       }
     };
 
     sendCart.setOnClickListener(sendlistener);
   }
 
-  public void getTime(){
-
+  private void showAlertDialog(String title, String message,int position) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(title);
+    builder.setMessage(message);
+    builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        deleteCartItem(position);
+        dialogInterface.dismiss(); // 關閉對話框
+        if (cartlist.getAdapter().getCount() == 0) {
+          // 購物車是空的就跳回menu
+          Intent intent = new Intent(Cart.this, Menu.class);
+          startActivity(intent);
+        }
+      }
+    });
+    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+      }
+    });
+    AlertDialog dialog = builder.create();
+    dialog.show();
   }
+
+  private void deleteCartItem(int position) {
+    Cursor cursor = (Cursor) cartlist.getAdapter().getItem(position);
+    int cartItemId = cursor.getInt(cursor.getColumnIndex("_id"));
+    cartdata.deleteCartItem(cartItemId);
+
+    //更新Cart
+    Cursor newCursor = cartdata.getALLCart();
+    ((SimpleCursorAdapter) cartlist.getAdapter()).changeCursor(newCursor);
+
+    //更新總金額
+    int price_of_all = cartdata.getAllprice();
+    allprice.setText("總金額: " + Integer.toString(price_of_all));
+  }
+
   private String getCurrentTime(int minutesToAdd) {
     TimeZone taiwanTimeZone = TimeZone.getTimeZone("Asia/Taipei");
 
