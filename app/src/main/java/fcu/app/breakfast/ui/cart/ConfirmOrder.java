@@ -40,7 +40,7 @@ public class ConfirmOrder extends AppCompatActivity { // 確認訂單介面
 
         // 時間
         String selectedMealTime = getIntent().getStringExtra("time");
-        orderTime.setText("送出訂單時間 : " + selectedMealTime);
+        orderTime.setText("訂單送出時間 : " + selectedMealTime);
 
         // 總金額
         int price_of_all = cartdata.getAllprice();
