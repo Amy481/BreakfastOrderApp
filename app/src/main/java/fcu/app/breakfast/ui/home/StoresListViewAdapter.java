@@ -44,8 +44,8 @@ public class StoresListViewAdapter extends BaseAdapter {
         iv.setImageResource(food.getImageId());
         iv.setScaleType((ImageView.ScaleType.CENTER_CROP));
         iv.setAdjustViewBounds(true);
-        iv.setMaxHeight(500);
-        iv.setMaxWidth(500);
+        iv.setMaxHeight(1000);
+
 
         TextView tvFoodPrice = view.findViewById(R.id.tv_store_name);
         tvFoodPrice.setText(String.valueOf(food.getstoreName()));
